@@ -13,21 +13,20 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
       font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
     }
 
     /* ── 공통 앱 컨테이너 ── */
-    /* 원본 402x874를 350x717로 scale (350/402 = 0.8706) */
     .app-container {
       width: 402px;
       height: 874px;
       position: relative;
       background: #000;
       overflow: hidden;
-      transform: scale(0.8706);
       transform-origin: top center;
-      margin-top: calc((717px - 874px) / 2);
-      margin-bottom: calc((717px - 874px) / 2);
     }
 
     /* ── 화면 전환 ── */
@@ -2892,6 +2891,26 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 }); // DOMContentLoaded
+
+  /* ── 뷰포트에 맞게 앱 크기 동적 조정 ── */
+  (function() {
+    function scaleApp() {
+      var app = document.querySelector('.app-container');
+      if (!app) return;
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      var appW = 402;
+      var appH = 874;
+      var scaleX = vw / appW;
+      var scaleY = vh / appH;
+      var scale = Math.min(scaleX, scaleY);
+      app.style.transform = 'scale(' + scale + ')';
+      app.style.marginTop = ((vh - appH * scale) / 2) + 'px';
+      app.style.marginBottom = ((vh - appH * scale) / 2) + 'px';
+    }
+    scaleApp();
+    window.addEventListener('resize', scaleApp);
+  })();
 </script>
 
 </body>
