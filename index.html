@@ -17,12 +17,17 @@
     }
 
     /* ── 공통 앱 컨테이너 ── */
+    /* 원본 402x874를 350x717로 scale (350/402 = 0.8706) */
     .app-container {
       width: 402px;
       height: 874px;
       position: relative;
       background: #000;
       overflow: hidden;
+      transform: scale(0.8706);
+      transform-origin: top center;
+      margin-top: calc((717px - 874px) / 2);
+      margin-bottom: calc((717px - 874px) / 2);
     }
 
     /* ── 화면 전환 ── */
